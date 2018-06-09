@@ -1,0 +1,193 @@
+<!doctype html>
+
+<head>  
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Map</title><meta name="keywords" content="map" />
+<meta name="description" content="TipStop" />
+<meta name="applicable-device"content="pc,mobile">
+
+<!--CSS/JS-->
+<script src="js/map.js"></script>
+<script src="http://ajax.aspnetcdn.com/ajax/jquery/jquery-2.1.4.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons">
+<link rel="stylesheet"
+    href="https://unpkg.com/bootstrap-material-design@4.1.1/dist/css/bootstrap-material-design.min.css"
+    integrity="sha384-wXznGJNEXNG1NFsbm0ugrLFMQPWswR3lds2VeinahP8N0zJw9VWSopbjv2x7WCvX" crossorigin="anonymous"> <!--bootstrap css-->
+<link href="css/mappage.css" rel="stylesheet">
+<link href="css/fontface.css" rel="stylesheet">
+</head>
+<body>
+
+<!--User Profile Drawer Overlay Start-->
+<div class="bmd-layout-container bmd-drawer-f-l bmd-drawer-overlay">
+    <header class="bmd-layout-header">
+        <div class="navbar navbar-light bg-faded">
+
+            <button class="navbar-open" type="button" data-toggle="drawer" data-target="#dw-s2">
+                <!--<span class="sr-only">Toggle drawer</span>-->
+                <i class="material-icons">menu<img src="img/notification.png" class="nav-noti"></i>
+            </button>
+            <div class="logonav"><img src="img/logo.png"></div><!--centered logo icon-->
+            <a href="#">
+            <!--<img src="img/small-logo.png" class="contactus" alt="contactus"/> rightside icon-->
+            </a>
+        </div>
+        
+    </header>
+    <div id="dw-s2" class="bmd-layout-drawer bg-faded">
+        <header>
+            <div><img src="img/userimg.png" id="userimg">
+                <div id="dr-title">Username</div>
+            </div>
+        </header>
+        <ul class="list-group">
+        	<style>
+        	  ul.list-group-inner{ list-style:none;}
+        	  .hide{display:none;}
+        	  .white{background:#fff;}
+        	  .grey{background:#CED2D4;}
+        	  a{cursor: pointer; }
+            </style>
+			<li>
+				<a class="list-group-item" href="respond.html">My Requests <img src="img/notification.png"> </a> 
+			</li>
+			<li>
+				<a class="list-group-item" href="receiveanswer.html">My Responds <img src="img/notification.png"></a> 
+			</li>
+			<li>
+				<a class="list-group-item" href="#">Contact Us</a>
+			</li> 
+            <li><a class="list-group-item" href="index.html">Log Out</a>
+            </li>
+        </ul>
+    </div>
+    <main class="bmd-layout-content">
+        <div class="main">
+            <div id="map">
+            </div>
+            <div class="container">
+                <a href="#" id="requestbutton" class="request herocontent-h" data-toggle="modal" data-target="#myModal">Request</a> 
+            </div>
+        </div>
+    </main>
+</div> 
+<div class="modal fade bs-example-modal-lg" id="myModal" role="dialog">
+	<div class="modal-dialog  modal-lg ">
+		<!-- Modal content-->
+		<div class="modal-content" role="document">
+			<div class="modal-header"> 
+				<h4 class="modal-title">Put your request bellow</h4>
+				<button type="button" class="close" data-dismiss="modal">&times;</button>
+			</div>
+			<div class="modal-body" style="width:100%"> 
+				<p>Select request</p>
+				<div>
+				<select class="custom-select custom-select-lg">
+                    <option value="art_gallery museum">Art Gallery/Museum</option>
+                    <option value="bakery cafe">Bakery/Cafe</option>
+                    <option value="bar night_club">Bar/Night Club</option>
+                    <option value="hair_care beauty_salon spa">Beauty</option>
+                    <option value="bowling_alley casino movie_theater amusement_park">Entertainment</option>      
+                    <option value="meal_delivery meal_takeaway restaurant ">Eating</option>
+                    <option value="zoo park city_hall church aquarium">Point of Interest</option>
+                    <option value="shopping_mall jewelry_store furniture_store clothing_store pet_store">Shopping</option>
+				</select>
+				</div> 
+				<p>Location Radius</p>
+				<select class="custom-select custom-select-lg">
+					<option value="1">1 km</option>
+					<option value="2">2 km</option>
+					<option value="3">3 km</option>
+					<option value="4">4 km</option>
+                    <option value="5">5 km</option>
+                    <option value="6">6 km</option>
+                    <option value="7">7 km</option>
+                    <option value="8">8 km</option>
+                    <option value="9">9 km</option>
+                    <option value="10">10 km</option>
+
+				</select>
+				<br><br>
+				<p>Your specific request</p> 
+				<input type="text" name="request" class="text-entry">
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="button-request" data-dismiss="modal">Request</button>
+				<button type="button" class="button-close btn-close" data-dismiss="modal">Close</button>
+			</div>
+		</div>    
+	</div>
+</div>
+
+<div id="ss" style="position: fixed;width: 400px;height: 100px;border: 2px black solid;z-index: 11;right: 0;bottom: 0px;display: flex;flex-direction: row;background: #fff;padding-left: 20px;box-sizing: border-box">
+	<div style="width: 80px;height: 80px;border-radius: 100px;background: #9c9a9a ;color: #fff;line-height: 80px;text-align: center;margin-top: 10px">photo</div>
+	<div style="height: 100%;display: flex;align-items: center;padding-left: 30px;box-sizing: border-box">
+		usernameshere@gmail.com <br>
+		likes your solution!
+	</div>
+</div>
+<!-- <div style="position: fixed;bottom: 0;right: 10px;z-index: 111">
+	<input type="button" value="122222222222222222" style="height: 30px" id="btn">
+</div> -->
+
+
+
+<!--User Profile Drawer Overlay End-->
+
+
+<!--Map Function Start-->
+<div id="mapbox">
+    
+</div>
+<!--Map Function End-->
+<!--js-->
+<script>
+	$('#ss').delay(3000).fadeOut();
+</script>
+<script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARmOZydOM2M72QluoI7IpbDX-3eGeZzGw&callback=initMap"
+        type="text/javascript"></script>
+ <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/popper.js@1.12.6/dist/umd/popper.js"
+        integrity="sha384-fA23ZRQ3G/J53mElWqVJEGJzU0sTs+SvzG8fXVWP+kJQ1lwFAOkcUOysnlKJC33U"
+        crossorigin="anonymous"></script>
+<script src="https://unpkg.com/bootstrap-material-design@4.1.1/dist/js/bootstrap-material-design.js"
+        integrity="sha384-CauSuKpEqAFajSpkdjv3z9t8E7RlpJ1UP0lKM/+NdtSarroVKu069AlsRPKkFBz9"
+        crossorigin="anonymous"></script>
+<!--Drawer Mouse Effects Start-->       
+<script>
+$(document).ready(function () { 
+    $('body').bootstrapMaterialDesign();
+	$("#dw-s2 .list-group li>.list-group-item").each(function(){ 
+		$(this).on("mouseover",function(){ 
+			$(this).addClass("grey");
+			$(this).removeClass("white");
+		});
+		$(this).on("click",function(){ 
+			if($(this).hasClass("selected")){
+				$(this).removeClass("selected");
+				$(this).parent().find(".list-group-inner").addClass("hide");
+			}else{
+				$(this).addClass("selected");
+				$(this).parent().find(".list-group-inner").removeClass("hide");
+			} 
+		});
+		$(this).on("mouseout",function(){ 
+			$(this).removeClass("grey");
+			$(this).addClass("white"); 
+		});
+	});
+	/*---------------*/
+
+});
+</script>
+<!--Drawer Mouse Effects End--> 
+
+
+</body>
+</html>
